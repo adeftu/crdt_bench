@@ -1,0 +1,37 @@
+SERVER machine
+--------------
+
+1. Install Infinispan [http://www.jboss.org/infinispan]:
+
+1.1. Unzip Infinispan in ISPN_HOME.
+1.2. Copy infinispan.xml and jgroups.xml from ./etc to <some directory>.
+1.3. Create the environment variable ISPN_CONF in ~/.bashrc:
+export ISPN_CONF=<some directory>
+1.4. Edit ISPN_HOME/bin/startServer.sh and add the following line at the end of add_classpath list:
+add_classpath "${ISPN_CONF}"
+1.5. Edit <some directory>/jgroups.xml and change "initial_hosts" to the IP of one server in the cluster, or <my external IP> if this is the first server.
+
+2. Run Hotrod server:
+$ ISPN_HOME/bin/startServer.sh -r hotrod -c infinispan.xml -l <my external IP> -p 11222
+
+
+CLIENT machine
+--------------
+
+1. Set up sbt [https://github.com/harrah/xsbt/wiki/Getting-Started-Setup]
+
+1.1. Download sbt-launch.jar and place it in ~/bin.
+1.2. Create a script to run the jar, by placing this in a file called sbt in your ~/bin directory:
+java -Xmx512M -jar `dirname $0`/sbt-launch.jar "$@"
+1.3. Make the script executable:
+$ chmod u+x ~/bin/sbt
+
+2. Run sbt in this directory:
+$ sbt
+
+3. Run all tests [src/test/scala]:
+> test
+
+4. Run only one test [src/test/scala]:
+> test-only <path to class file> (e.g. test-only de.oneandone.eventtracker.infinispanhotrod.trie.Bench)
+(Before running Bench.scala edit bench.properties file first!)

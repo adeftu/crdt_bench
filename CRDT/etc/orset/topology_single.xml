@@ -1,0 +1,13 @@
+<topology>
+	<cluster id="A">
+		<store id="alpha" ip="127.0.0.1" port="6379"/>
+	</cluster>
+
+	<cluster id="B">
+		<store id="beta" ip="127.0.0.1" port="6380"/>
+	</cluster>
+	
+	<cluster id="C">
+		<store id="gamma" ip="127.0.0.1" port="6381"/>
+	</cluster>
+</topology>

@@ -1,0 +1,14 @@
+1. Set up sbt [https://github.com/harrah/xsbt/wiki/Getting-Started-Setup]
+
+1.1. Download sbt-launch.jar and place it in ~/bin.
+1.2. Create a script to run the jar, by placing this in a file called sbt in your ~/bin directory:
+java -Xmx512M -jar `dirname $0`/sbt-launch.jar "$@"
+1.3. Make the script executable:
+$ chmod u+x ~/bin/sbt
+
+2. Run sbt in this directory:
+$ sbt
+
+3. Run all tests [src/test/scala]:
+> test
+(Before running Bench.scala edit bench.properties file first!)
